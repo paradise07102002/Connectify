@@ -1,3 +1,4 @@
+import 'package:connectify/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:connectify/screens/home/home_screen.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }
