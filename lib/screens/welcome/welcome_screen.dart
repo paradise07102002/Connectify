@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:connectify/screens/register/register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -39,7 +40,14 @@ class WelcomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RegisterScreen(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Sign up',
                         style: TextStyle(fontSize: 18, color: Colors.white),
