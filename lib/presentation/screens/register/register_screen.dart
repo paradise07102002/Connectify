@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:connectify/widgets/custom_text_field.dart';
-import 'package:connectify/widgets/primary_button.dart';
+import 'package:connectify/presentation/widgets/custom_text_field.dart';
+import 'package:connectify/presentation/widgets/primary_button.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
