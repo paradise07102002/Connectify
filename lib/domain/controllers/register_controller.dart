@@ -1,6 +1,7 @@
 import 'package:connectify/data/models/register_model.dart';
 import 'package:connectify/data/repositories/auth_repository.dart';
 import 'package:connectify/presentation/widgets/dialog/dialog_helper.dart';
+import 'package:connectify/utils/validators.dart';
 import 'package:flutter/material.dart';
 
 class RegisterController with ChangeNotifier {
@@ -27,6 +28,12 @@ class RegisterController with ChangeNotifier {
         emailError != null ||
         passwordError != null ||
         confirmPasswordError != null) {
+      notifyListeners();
+      return null;
+    }
+
+    if (!Validators.isValidEmail(email.trim())) {
+      emailError = "Email không đúng định dạng";
       notifyListeners();
       return null;
     }
