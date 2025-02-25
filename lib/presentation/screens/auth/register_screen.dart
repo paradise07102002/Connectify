@@ -1,6 +1,9 @@
+import 'package:connectify/domain/controllers/register_controller.dart';
+import 'package:connectify/presentation/widgets/dialog/dialog_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:connectify/presentation/widgets/custom_text_field.dart';
 import 'package:connectify/presentation/widgets/primary_button.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -14,40 +17,10 @@ class _RegisterScreen extends State<RegisterScreen> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
-  String? _nameError, _emailError, _passwordError, _confirmPasswordError;
-
-  void _register() async {
-    setState(() {
-      _nameError =
-          _nameController.text.trim().isEmpty ? "Please enter name" : null;
-      _emailError =
-          _emailController.text.trim().isEmpty ? "Please enter email" : null;
-      _passwordError =
-          _passwordController.text.trim().isEmpty
-              ? "Please enter password"
-              : null;
-      _confirmPasswordError =
-          _confirmPasswordController.text.trim().isEmpty
-              ? "Please confirm your password"
-              : null;
-    });
-
-    if (_nameController.text.trim().isEmpty ||
-        _emailController.text.trim().isEmpty ||
-        _passwordController.text.trim().isEmpty ||
-        _confirmPasswordController.text.trim().isEmpty) {
-      _showFieldErrors();
-      return;
-    }
-  }
-
-  //The function updates again to display the error
-  void _showFieldErrors() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
+    final registerController = Provider.of<RegisterController>(context);
+
     return Scaffold(
       appBar: AppBar(title: Text('Sign up'), centerTitle: true, elevation: 0),
       body: SingleChildScrollView(
@@ -71,32 +44,44 @@ class _RegisterScreen extends State<RegisterScreen> {
               label: 'Your Name',
               icon: Icons.person,
               controller: _nameController,
-              errorText: _nameError,
+              errorText: registerController.nameError,
             ),
             CustomTextField(
               label: 'Email',
               icon: Icons.email,
               controller: _emailController,
-              errorText: _emailError,
+              errorText: registerController.emailError,
             ),
             CustomTextField(
-              label: 'Your Name',
+              label: 'Password',
               icon: Icons.lock,
               controller: _passwordController,
-              errorText: _passwordError,
+              errorText: registerController.passwordError,
               isPassword: true,
             ),
             CustomTextField(
-              label: 'Your Name',
+              label: 'Confirm password',
               icon: Icons.person,
               controller: _confirmPasswordController,
-              errorText: _confirmPasswordError,
+              errorText: registerController.confirmPasswordError,
               isPassword: true,
             ),
 
             SizedBox(height: 10),
-
-            PrimaryButton(text: 'Sign up', onPressed: _register),
+            registerController.isLoading
+                ? Center(child: CircularProgressIndicator())
+                : PrimaryButton(
+              text: 'Sign up',
+              onPressed: () async {
+                final response = await registerController.register(
+                  context: context,
+                  name: _nameController.text,
+                  email: _emailController.text,
+                  password: _passwordController.text,
+                  confirmPassword: _confirmPasswordController.text,
+                );
+              },
+            ),
             SizedBox(height: 20),
             Center(
               child: TextButton(

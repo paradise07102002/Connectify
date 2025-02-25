@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:connectify/presentation/screens/register/register_screen.dart';
+import 'package:connectify/presentation/screens/auth/register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
