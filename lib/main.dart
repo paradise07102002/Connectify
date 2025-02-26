@@ -1,13 +1,15 @@
+import 'package:connectify/domain/controllers/auth/login_controller.dart';
 import 'package:connectify/domain/controllers/auth/register_controller.dart';
 import 'package:connectify/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:connectify/presentation/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => RegisterController()),
+      ChangeNotifierProvider(create: (context) => LoginController())
     ],
     child: MyApp(),
   ));
