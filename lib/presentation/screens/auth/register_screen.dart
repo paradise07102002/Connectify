@@ -1,4 +1,4 @@
-import 'package:connectify/domain/controllers/register_controller.dart';
+import 'package:connectify/domain/controllers/auth/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:connectify/presentation/widgets/fields/custom_text_field.dart';
 import 'package:connectify/presentation/widgets/buttons/primary_button.dart';
