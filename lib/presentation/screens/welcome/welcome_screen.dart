@@ -1,3 +1,4 @@
+import 'package:connectify/presentation/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:connectify/presentation/screens/auth/register_screen.dart';
 
@@ -65,7 +66,14 @@ class WelcomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Sign in',
                         style: TextStyle(fontSize: 18, color: Colors.white),
