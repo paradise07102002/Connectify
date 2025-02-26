@@ -1,4 +1,4 @@
-import 'package:connectify/domain/controllers/register_controller.dart';
+import 'package:connectify/domain/controllers/auth/register_controller.dart';
 import 'package:connectify/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:connectify/presentation/screens/home/home_screen.dart';
