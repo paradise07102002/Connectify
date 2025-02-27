@@ -50,7 +50,7 @@ class _LoginScreen extends State<LoginScreen> {
                 icon: Icons.lock,
                 isPassword: true,
                 controller: _passwordController,
-                errorText: loginController.emailError,
+                errorText: loginController.passwordError,
               ),
               SizedBox(height: size.height * 0.01),
 
