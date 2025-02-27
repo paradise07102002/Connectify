@@ -1,8 +1,8 @@
 import 'package:connectify/domain/controllers/register_controller.dart';
-import 'package:connectify/presentation/widgets/dialog/dialog_helper.dart';
+import 'package:connectify/presentation/widgets/dialogs/dialog_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:connectify/presentation/widgets/custom_text_field.dart';
-import 'package:connectify/presentation/widgets/primary_button.dart';
+import 'package:connectify/presentation/widgets/fields/custom_text_field.dart';
+import 'package:connectify/presentation/widgets/buttons/primary_button.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
