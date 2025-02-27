@@ -1,6 +1,6 @@
 import 'package:connectify/data/models/register_model.dart';
 import 'package:connectify/data/repositories/auth_repository.dart';
-import 'package:connectify/presentation/widgets/dialog/dialog_helper.dart';
+import 'package:connectify/presentation/widgets/dialogs/dialog_helper.dart';
 import 'package:connectify/utils/validators.dart';
 import 'package:flutter/material.dart';
 
