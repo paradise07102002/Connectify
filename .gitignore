@@ -92,3 +92,9 @@ coverage/
 
 # Test results
 test-results/
+
+# Ignore unnecessary platform folders
+windows/
+web/
+linux/
+macos/
