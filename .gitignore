@@ -1,45 +1,94 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
+# Flutter-specific
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.dart_tool/
 .build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+.melos/
 
-# IntelliJ related
+# User-specific
 *.iml
 *.ipr
 *.iws
+
+# IDEs & Editors
 .idea/
+.vscode/
+*.swp
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Logs, Crash Reports & Debug
+*.log
+debug.log
+.stackdump
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# macOS
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/GeneratedPluginRegistrant.h
+ios/Flutter/GeneratedPluginRegistrant.m
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/.dart_tool/
+ios/.firebase/
+
+# Android
+android/.gradle/
+android/app/debug.keystore
+android/key.properties
+android/app/release.keystore
+android/app/google-services.json
+android/app/src/debug/res/raw/google-services.json
+android/app/src/release/res/raw/google-services.json
+android/app/src/profile/res/raw/google-services.json
+android/.cxx/
+android/app/src/profile/
+android/local.properties
+android/app/proguard-rules.pro
+android/build/
+
+# Flutter dependencies
+pubspec.lock
+pubspec_overrides.yaml
+
+# Web
+web/.dart_tool/
+web/.firebase/
+
+# Linux
+linux/flutter/
+linux/.dart_tool/
+
+# Windows
+windows/flutter/
+windows/.dart_tool/
+windows/CMakeLists.txt
+
+# Generated files
+*.g.dart
+*.mocks.dart
+*.freezed.dart
+*.config.dart
+*.json_serializable.dart
+
+# Firebase related
+firebase_app_id_file.json
+
+# Generated files by Flutter build system
+build/
 .dart_tool/
+.cache/
+.pinned/
 .flutter-plugins
 .flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
+.packages
 
-# Symbolication related
-app.*.symbols
+# Coverage
+coverage/
 
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Test results
+test-results/
