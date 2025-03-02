@@ -38,6 +38,7 @@ dependencies:
   fetch_client: ^1.1.2
   cupertino_http: ^2.0.2
   shared_preferences: ^2.5.2
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
