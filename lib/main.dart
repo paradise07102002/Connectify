@@ -1,15 +1,16 @@
+import 'package:connectify/domain/controllers/check_field_controller.dart';
 import 'package:connectify/domain/controllers/login_controller.dart';
-import 'package:connectify/domain/controllers/register_controller.dart';
+import 'package:connectify/domain/controllers/signup_controller.dart';
 import 'package:connectify/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:connectify/presentation/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (context) => RegisterController()),
       ChangeNotifierProvider(create: (context) => LoginController()),
+      ChangeNotifierProvider(create: (context) => CheckFieldController()),
+      ChangeNotifierProvider(create: (context) => SignupController()),
     ],
     child: MyApp(),
   ));
