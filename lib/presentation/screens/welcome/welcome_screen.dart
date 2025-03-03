@@ -1,6 +1,6 @@
 import 'package:connectify/presentation/screens/auth/login_screen.dart';
+import 'package:connectify/presentation/screens/auth/signup/fullname_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:connectify/presentation/screens/auth/register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RegisterScreen(),
+                            builder: (context) => FullnameScreen(),
                           ),
                         );
                       },

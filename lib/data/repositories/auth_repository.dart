@@ -1,19 +1,19 @@
 import 'dart:convert';
 import 'package:connectify/data/models/login_model.dart';
-import 'package:connectify/data/models/register_model.dart';
+import 'package:connectify/data/models/signup_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
-  final String baseUrl = "http://10.0.2.2:5151/api/Users";
+  final String baseUrl = "http://10.0.2.2:5151/api/Auth";
 
   //Register
-  Future<Map<String, dynamic>> register(RegisterModel register) async {
+  Future<Map<String, dynamic>> register(SignupModel signup) async {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/register'),
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode(register.toJson()),
+        body: jsonEncode(signup.toJson()),
       );
 
       if (response.statusCode == 201) {

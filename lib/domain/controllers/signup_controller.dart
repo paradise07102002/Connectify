@@ -1,10 +1,10 @@
-import 'package:connectify/data/models/register_model.dart';
+import 'package:connectify/data/models/signup_model.dart';
 import 'package:connectify/data/repositories/auth_repository.dart';
 import 'package:connectify/presentation/widgets/dialogs/dialog_helper.dart';
 import 'package:connectify/utils/validators.dart';
 import 'package:flutter/material.dart';
 
-class RegisterController with ChangeNotifier {
+class SignupController with ChangeNotifier {
   final AuthRepository _authRepository = AuthRepository();
 
   bool isLoading = false;
@@ -13,12 +13,15 @@ class RegisterController with ChangeNotifier {
 
   Future<Map<String, dynamic>?> register({
     required BuildContext context,
-    required String name,
+    required String userName,
     required String email,
     required String password,
     required String confirmPassword,
+    required DateTime dateOfBirth,
+    required String fullName,
+    required int gender, 
   }) async {
-    nameError = name.trim().isEmpty ? "Please enter name" : null;
+    nameError = userName.trim().isEmpty ? "Please enter user name" : null;
     emailError = email.trim().isEmpty ? "Please enter email" : null;
     passwordError = password.trim().isEmpty ? "Please enter password" : null;
     confirmPasswordError =
@@ -47,10 +50,13 @@ class RegisterController with ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    final user = RegisterModel(
-      userName: name.trim(),
+    final user = SignupModel(
+      userName: userName.trim(),
       email: email.trim(),
       password: password,
+      fullName: fullName.trim(),
+      dateOfBirth: dateOfBirth,
+      gender: gender,
     );
 
     final response = await _authRepository.register(user);
