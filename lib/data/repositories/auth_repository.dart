@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
-  final String baseUrl = "http://10.0.2.2:5151/api/Users";
+  final String baseUrl = "http://10.0.2.2:5151/api/Auth";
 
   //Register
   Future<Map<String, dynamic>> register(RegisterModel register) async {
