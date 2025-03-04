@@ -1,4 +1,5 @@
 import 'package:connectify/presentation/screens/home/home_screen.dart';
+import 'package:connectify/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:connectify/presentation/screens/welcome/welcome_screen.dart';
 
@@ -32,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => WelcomeScreen(),
+          builder: (context) => MainScreen(),
         ),
       );
     });
