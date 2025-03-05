@@ -53,15 +53,17 @@ class AuthRepository {
       if (response.statusCode != 200) return _handleError(response);
 
       final data = jsonDecode(response.body);
-      final token = data['token'];
+      final accessToken = data['accessToken'];
+      final refreshToken = data['refreshToken'];
 
-      if (token is String) {
+      if (accessToken is String && refreshToken is String) {
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString("jwt_token", token);
-        return {"token": token};
+        await prefs.setString("accessToken", accessToken);
+        await prefs.setString("refreshToken", refreshToken);
+        return {"accessToken": accessToken, "refreshToken": refreshToken};
       }
 
-      return {"error": "Invalid token received"};
+      return {"error": "Invalid"};
     } catch (e) {
       return {"error": "Connection error: $e"};
     }
