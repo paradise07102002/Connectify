@@ -112,6 +112,7 @@ class AuthRepository {
   //Logout function (remove token)
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove("jwt_token");
+    await prefs.remove("accessToken");
+    await prefs.remove("refreshToken");
   }
 }
