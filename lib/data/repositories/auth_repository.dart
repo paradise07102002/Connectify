@@ -67,6 +67,12 @@ class AuthRepository {
     }
   }
 
+  //Get AccessToken
+  Future<String?> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString("accessToken");
+  }
+
   //Logout function (remove token)
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
