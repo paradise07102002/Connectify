@@ -79,6 +79,34 @@ class AuthRepository {
     return prefs.getString("refreshToken");
   }
 
+  //Update Access Token with Refresh Token when expired
+  Future<bool> refreshAccessToken() async {
+    try {
+      final refreshToken = await getRefreshToken();
+      if (refreshToken == null) return false;
+
+      final response = await http.post(
+        Uri.parse('$baseUrl/refresh'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"refresh": refreshToken}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final newAccessToken = data['accessToken'];
+
+        if (newAccessToken is String) {
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString("accessToken", newAccessToken);
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
   //Logout function (remove token)
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
