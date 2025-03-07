@@ -42,16 +42,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  Future<void> _navigateToNextScreen() async {
-    bool loggedIn = await _authService.isLoggedIn();
-
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => loggedIn ? MainScreen() : WelcomeScreen(),
-      ),
-    );
-  }
-
   void _startAnimation() {
     Future.delayed(Duration(milliseconds: 500), () {
       setState(() {
