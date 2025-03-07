@@ -27,10 +27,11 @@ class AuthService {
 
   Future<bool> refreshTokenIfNeeded() async {
     final prefs = await SharedPreferences.getInstance();
-    String? refreshToken = prefs.getString("refresh_token");
+    String? refreshToken = prefs.getString(refreshTokenKey);
 
     if (refreshToken == null || refreshToken.isEmpty) {
-      return false; // Không có refresh token để làm mới
+      _forceLogout(); // Refresh token does not exist => Log out
+      return false;
     }
 
     final response = await http.post(
@@ -41,11 +42,11 @@ class AuthService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      await prefs.setString("access_token", data["accessToken"]);
-      await prefs.setString("refresh_token", data["refreshToken"]);
+      await saveTokens(data["accessToken"], data["refreshToken"]);
       return true; // Refresh thành công
     }
 
+    _forceLogout();
     return false; // Refresh thất bại
   }
 
