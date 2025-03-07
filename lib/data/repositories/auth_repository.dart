@@ -58,8 +58,8 @@ class AuthRepository {
 
       if (accessToken is String && refreshToken is String) {
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString("accessToken", accessToken);
-        await prefs.setString("refreshToken", refreshToken);
+        await prefs.setString("access_token", accessToken);
+        await prefs.setString("refresh_token", refreshToken);
         return {"accessToken": accessToken, "refreshToken": refreshToken};
       }
 
