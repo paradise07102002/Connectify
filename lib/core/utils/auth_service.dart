@@ -5,8 +5,8 @@ import 'dart:convert';
 class AuthService {
   final String baseUrl = "http://10.0.2.2:5151/api/Auth";
 
-  static const String accessTokenKey = "accessToken";
-  static const String refreshTokenKey = "refreshToken";
+  static const String accessTokenKey = "access_token";
+  static const String refreshTokenKey = "refresh_token";
 
   /// Check if user is logged in
   Future<bool> isLoggedIn() async {
