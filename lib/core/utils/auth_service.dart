@@ -1,3 +1,6 @@
+import 'package:connectify/core/utils/navigator_service.dart';
+import 'package:connectify/presentation/screens/welcome/welcome_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -44,6 +47,19 @@ class AuthService {
     }
 
     return false; // Refresh thất bại
+  }
+
+  /// Clear token and redirect to login screen
+  void _forceLogout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(accessTokenKey);
+    await prefs.remove(refreshTokenKey);
+
+    // Go back to Welcome screen
+    navigatorKey.currentState?.pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => WelcomeScreen()),
+      (Route<dynamic> route) => false, //Clear all stack navigation
+    );
   }
 
   /// Get accessToken
