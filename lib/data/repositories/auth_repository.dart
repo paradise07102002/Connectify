@@ -110,9 +110,17 @@ class AuthRepository {
   }
 
   //Logout function (remove token)
-  Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove("accessToken");
-    await prefs.remove("refreshToken");
+  Future<bool> logout(String refreshToken) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/logout'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'refreshToken': refreshToken}),
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
