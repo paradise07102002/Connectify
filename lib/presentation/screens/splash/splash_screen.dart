@@ -1,3 +1,4 @@
+import 'package:connectify/core/utils/auth_service.dart';
 import 'package:connectify/presentation/screens/home/home_screen.dart';
 import 'package:connectify/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,11 @@ class SplashScreen extends StatefulWidget {
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
-
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final AuthService _authService = AuthService();
+
   double _opacity = 0.0;
   double _scale = 0.8;
 
@@ -19,6 +21,25 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _startAnimation();
+    _checkAuthentication();
+  }
+
+  Future<void> _checkAuthentication() async {
+    bool isLoggedIn = await _authService.isLoggedIn();
+    bool refreshed = await _authService.refreshTokenIfNeeded();
+
+    ///If login or refresh is successful, go to `MainScreen`, otherwise go to `WelcomeScreen`
+    bool shouldGoToMainScreen = isLoggedIn || refreshed;
+
+    Future.delayed(Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder:
+              (context) =>
+                  shouldGoToMainScreen ? MainScreen() : WelcomeScreen(),
+        ),
+      );
+    });
   }
 
   void _startAnimation() {
@@ -32,9 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => MainScreen(),
-        ),
+        MaterialPageRoute(builder: (context) => MainScreen()),
       );
     });
   }
@@ -51,10 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
             scale: _scale,
             duration: Duration(seconds: 1),
             curve: Curves.easeOut,
-            child: Image.asset(
-              'assets/images/logo_connectify.png',
-              width: 350,
-            ),
+            child: Image.asset('assets/images/logo_connectify.png', width: 350),
           ),
         ),
       ),

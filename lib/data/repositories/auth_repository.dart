@@ -53,29 +53,74 @@ class AuthRepository {
       if (response.statusCode != 200) return _handleError(response);
 
       final data = jsonDecode(response.body);
-      final token = data['token'];
+      final accessToken = data['accessToken'];
+      final refreshToken = data['refreshToken'];
 
-      if (token is String) {
+      if (accessToken is String && refreshToken is String) {
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString("jwt_token", token);
-        return {"token": token};
+        await prefs.setString("access_token", accessToken);
+        await prefs.setString("refresh_token", refreshToken);
+        return {"accessToken": accessToken, "refreshToken": refreshToken};
       }
 
-      return {"error": "Invalid token received"};
+      return {"error": "Invalid"};
     } catch (e) {
       return {"error": "Connection error: $e"};
     }
   }
 
-  //Get Stored token
-  Future<String?> getToken() async {
+  //Get AccessToken
+  Future<String?> getAccessToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString("jwt_token");
+    return prefs.getString("accessToken");
+  }
+
+  //Get RefreshToken
+  Future<String?> getRefreshToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString("refreshToken");
+  }
+
+  //Update Access Token with Refresh Token when expired
+  Future<bool> refreshAccessToken() async {
+    try {
+      final refreshToken = await getRefreshToken();
+      if (refreshToken == null) return false;
+
+      final response = await http.post(
+        Uri.parse('$baseUrl/refresh'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"refresh": refreshToken}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final newAccessToken = data['accessToken'];
+
+        if (newAccessToken is String) {
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString("accessToken", newAccessToken);
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 
   //Logout function (remove token)
-  Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove("jwt_token");
+  Future<bool> logout(String refreshToken) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/logout'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'refreshToken': refreshToken}),
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

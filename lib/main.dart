@@ -1,3 +1,4 @@
+import 'package:connectify/core/utils/navigator_service.dart';
 import 'package:connectify/domain/controllers/check_field_controller.dart';
 import 'package:connectify/domain/controllers/login_controller.dart';
 import 'package:connectify/domain/controllers/signup_controller.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      navigatorKey: navigatorKey,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
