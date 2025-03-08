@@ -1,4 +1,5 @@
 import 'package:connectify/core/utils/navigator_service.dart';
+import 'package:connectify/data/repositories/auth_repository.dart';
 import 'package:connectify/presentation/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,8 @@ class AuthService {
 
   static const String accessTokenKey = "access_token";
   static const String refreshTokenKey = "refresh_token";
+
+  final AuthRepository _authRepository = AuthRepository();
 
   /// Check if user is logged in
   Future<bool> isLoggedIn() async {
@@ -76,9 +79,16 @@ class AuthService {
   }
 
   /// Delete token on logout
-  Future<void> logout() async {
+  Future<bool> logout() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(accessTokenKey);
-    await prefs.remove(refreshTokenKey);
+    String? refreshToken = await prefs.getString(refreshTokenKey);
+
+    if (refreshToken == null || refreshToken.isEmpty) return false;
+    bool success = await _authRepository.logout(refreshToken);
+    if (success) {
+      await prefs.remove(accessTokenKey);
+      await prefs.remove(refreshTokenKey);
+    }
+    return success;
   }
 }
