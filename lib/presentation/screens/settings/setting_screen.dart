@@ -1,4 +1,6 @@
+import 'package:connectify/core/utils/auth_service.dart';
 import 'package:connectify/domain/controllers/logout_controller.dart';
+import 'package:connectify/presentation/screens/welcome/welcome_screen.dart';
 import 'package:connectify/presentation/widgets/settings/settings_item.dart';
 import 'package:connectify/presentation/widgets/settings/settings_section.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreen extends State<SettingScreen> {
-  final LogoutController _logoutController = LogoutController();
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,14 @@ class _SettingScreen extends State<SettingScreen> {
                 Icons.logout,
                 'Logout',
                 onTap: () async {
-                  await _logoutController.logout(context);
+                  bool success = await _authService.logout();
+                  if (success) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                      (route) => false
+                    );
+                  }
                 },
               ),
             ]),
