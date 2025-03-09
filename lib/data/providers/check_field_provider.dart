@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CheckFieldController with ChangeNotifier {
+class CheckFieldProvider with ChangeNotifier {
   bool isLoading = false;
 
   String? errorMessage;
