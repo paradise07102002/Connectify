@@ -1,7 +1,7 @@
 import 'package:connectify/core/utils/navigator_service.dart';
 import 'package:connectify/data/providers/user_provider.dart';
 import 'package:connectify/domain/controllers/check_field_controller.dart';
-import 'package:connectify/domain/controllers/login_controller.dart';
+import 'package:connectify/domain/controllers/auth/login_controller.dart';
 import 'package:connectify/domain/controllers/auth/signup_controller.dart';
 import 'package:connectify/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
