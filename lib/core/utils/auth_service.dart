@@ -2,7 +2,7 @@ import 'package:connectify/core/utils/navigator_service.dart';
 import 'package:connectify/data/repositories/auth_repository.dart';
 import 'package:connectify/presentation/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,21 +16,21 @@ class AuthService {
 
   /// Check if user is logged in
   Future<bool> isLoggedIn() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString(accessTokenKey);
+    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    final token = await secureStorage.read(key: accessTokenKey);
     return token != null && token.isNotEmpty;
   }
 
   /// Save accessToken and refreshToken to SharedPreferences
   Future<void> saveTokens(String accessToken, String refreshToken) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(accessTokenKey, accessToken);
-    await prefs.setString(refreshTokenKey, refreshToken);
+    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    await secureStorage.write(key: accessTokenKey, value: accessToken);
+    await secureStorage.write(key: refreshTokenKey, value: refreshToken);
   }
 
   Future<bool> refreshTokenIfNeeded() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? refreshToken = prefs.getString(refreshTokenKey);
+    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    String? refreshToken = await secureStorage.read(key: refreshTokenKey);
 
     if (refreshToken == null || refreshToken.isEmpty) {
       _forceLogout(); // Refresh token does not exist => Log out
@@ -55,9 +55,9 @@ class AuthService {
 
   /// Clear token and redirect to login screen
   void _forceLogout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(accessTokenKey);
-    await prefs.remove(refreshTokenKey);
+    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    await secureStorage.delete(key: accessTokenKey);
+    await secureStorage.delete(key: refreshTokenKey);
 
     // Go back to Welcome screen
     navigatorKey.currentState?.pushAndRemoveUntil(
@@ -68,26 +68,26 @@ class AuthService {
 
   /// Get accessToken
   Future<String?> getAccessToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(accessTokenKey);
+    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    return secureStorage.read(key: accessTokenKey);
   }
 
   /// Get refreshToken
   Future<String?> getRefreshToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(refreshTokenKey);
+    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    return secureStorage.read(key: refreshTokenKey);
   }
 
   /// Delete token on logout
   Future<bool> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? refreshToken = await prefs.getString(refreshTokenKey);
+    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    String? refreshToken = await secureStorage.read(key: refreshTokenKey);
 
     if (refreshToken == null || refreshToken.isEmpty) return false;
     bool success = await _authRepository.logout(refreshToken);
     if (success) {
-      await prefs.remove(accessTokenKey);
-      await prefs.remove(refreshTokenKey);
+      await secureStorage.delete(key: accessTokenKey);
+      await secureStorage.delete(key: refreshTokenKey);
     }
     return success;
   }

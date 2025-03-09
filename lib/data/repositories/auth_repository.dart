@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:connectify/data/models/login_model.dart';
 import 'package:connectify/data/models/signup_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthRepository {
   final String baseUrl = "http://10.0.2.2:5151/api/Auth";
@@ -57,9 +57,9 @@ class AuthRepository {
       final refreshToken = data['refreshToken'];
 
       if (accessToken is String && refreshToken is String) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString("access_token", accessToken);
-        await prefs.setString("refresh_token", refreshToken);
+        final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+        await secureStorage.write(key: 'access_token', value: accessToken);
+        await secureStorage.write(key: 'refresh_token', value: refreshToken);
         return {"accessToken": accessToken, "refreshToken": refreshToken};
       }
 
@@ -69,16 +69,11 @@ class AuthRepository {
     }
   }
 
-  //Get AccessToken
-  Future<String?> getAccessToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString("accessToken");
-  }
-
   //Get RefreshToken
   Future<String?> getRefreshToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString("refreshToken");
+    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+    return secureStorage.read(key: 'refresh_token');
   }
 
   //Update Access Token with Refresh Token when expired
@@ -98,8 +93,9 @@ class AuthRepository {
         final newAccessToken = data['accessToken'];
 
         if (newAccessToken is String) {
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString("accessToken", newAccessToken);
+          final FlutterSecureStorage secureStorage =
+              const FlutterSecureStorage();
+          await secureStorage.write(key: 'access_token', value: newAccessToken);
           return true;
         }
       }
