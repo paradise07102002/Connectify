@@ -1,5 +1,4 @@
-import 'package:connectify/core/utils/auth_service.dart';
-import 'package:connectify/domain/controllers/logout_controller.dart';
+import 'package:connectify/data/services/auth_service.dart';
 import 'package:connectify/presentation/screens/welcome/welcome_screen.dart';
 import 'package:connectify/presentation/widgets/settings/settings_item.dart';
 import 'package:connectify/presentation/widgets/settings/settings_section.dart';
