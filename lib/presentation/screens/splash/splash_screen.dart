@@ -1,5 +1,4 @@
-import 'package:connectify/core/utils/auth_service.dart';
-import 'package:connectify/presentation/screens/home/home_screen.dart';
+import 'package:connectify/data/services/auth_service.dart';
 import 'package:connectify/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:connectify/presentation/screens/welcome/welcome_screen.dart';
