@@ -1,6 +1,6 @@
 import 'package:connectify/core/utils/navigator_service.dart';
 import 'package:connectify/data/providers/user_provider.dart';
-import 'package:connectify/domain/controllers/check_field_controller.dart';
+import 'package:connectify/data/providers/check_field_provider.dart';
 import 'package:connectify/domain/controllers/auth/login_controller.dart';
 import 'package:connectify/domain/controllers/auth/signup_controller.dart';
 import 'package:connectify/presentation/screens/splash/splash_screen.dart';
@@ -11,7 +11,7 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => LoginController()),
-      ChangeNotifierProvider(create: (context) => CheckFieldController()),
+      ChangeNotifierProvider(create: (context) => CheckFieldProvider()),
       ChangeNotifierProvider(create: (context) => SignupController()),
       ChangeNotifierProvider(create: (context) => UserProvider()),
     ],
