@@ -1,4 +1,4 @@
-import 'package:connectify/domain/controllers/signup_controller.dart';
+import 'package:connectify/domain/controllers/auth/signup_controller.dart';
 import 'package:connectify/presentation/widgets/buttons/primary_button.dart';
 import 'package:connectify/presentation/widgets/fields/custom_text_field.dart';
 import 'package:flutter/material.dart';

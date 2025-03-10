@@ -36,7 +36,7 @@ class SignupController with ChangeNotifier {
     }
 
     if (!Validators.isValidEmail(email.trim())) {
-      emailError = "Email không đúng định dạng";
+      emailError = "Email is not in correct format.";
       notifyListeners();
       return null;
     }

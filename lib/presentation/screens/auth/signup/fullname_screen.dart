@@ -1,4 +1,4 @@
-import 'package:connectify/domain/controllers/check_field_controller.dart';
+import 'package:connectify/data/providers/check_field_provider.dart';
 import 'package:connectify/presentation/screens/auth/signup/birthday_screen.dart';
 import 'package:connectify/presentation/widgets/buttons/primary_button.dart';
 import 'package:connectify/presentation/widgets/fields/custom_text_field.dart';
@@ -16,7 +16,7 @@ class _FullnameScreen extends State<FullnameScreen> {
     // Get the screen size to make the UI responsive
     final size = MediaQuery.of(context).size;
 
-    final checkFieldNull = Provider.of<CheckFieldController>(context);
+    final checkFieldNull = Provider.of<CheckFieldProvider>(context);
 
     final TextEditingController _fullNameController = TextEditingController();
 

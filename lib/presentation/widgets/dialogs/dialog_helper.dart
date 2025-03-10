@@ -32,9 +32,10 @@ class DialogHelper {
               TextButton(
                 onPressed: () {
                   Navigator.of(ctx).pop();
-                  Navigator.pushReplacement(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => MainScreen()),
+                    (route) => false
                   );
                 },
                 child: Text("OK"),

@@ -1,8 +1,10 @@
+import 'package:connectify/data/providers/user_provider.dart';
 import 'package:connectify/data/services/auth_service.dart';
 import 'package:connectify/presentation/screens/welcome/welcome_screen.dart';
 import 'package:connectify/presentation/widgets/settings/settings_item.dart';
 import 'package:connectify/presentation/widgets/settings/settings_section.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatefulWidget {
   @override
@@ -13,13 +15,22 @@ class _SettingScreen extends State<SettingScreen> {
   final AuthService _authService = AuthService();
 
   @override
+  void initState() {
+    super.initState();
+    Provider.of<UserProvider>(context, listen: false).loadUserData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Get the screen size to make the UI responsive
     final size = MediaQuery.of(context).size;
+    final userProvider = Provider.of<UserProvider>(context);
 
     return Scaffold(
       appBar: AppBar(title: Text('Settings'), centerTitle: true),
-      body: SingleChildScrollView(
+      body: userProvider.isLoading
+          ? Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -29,17 +40,21 @@ class _SettingScreen extends State<SettingScreen> {
                     CircleAvatar(
                       radius: size.width * 0.15,
                       backgroundImage: NetworkImage(
-                        'https://static.wikia.nocookie.net/lookism/images/b/bb/525_Young_Shingen.png/revision/latest?cb=20241024142804',
+                        userProvider.userModel?.avatarUrl ??
+                            'https://www.google.com/url?sa=i&url=https%3A%2F%2Fvillagesonmacarthur.com%2Fcommunity%2Fblank-avatar%2F&psig=AOvVaw3hPIuKAniDndYtaNOV_Z9I&ust=1741603688296000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKCO9r3p_IsDFQAAAAAdAAAAABAJ',
                       ),
                     ),
                     Text(
-                      'Phạm Đình Khôi',
+                      userProvider.userModel?.fullName ?? "",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text('pdk@gmail.com', style: TextStyle(color: Colors.grey)),
+                    Text(
+                      userProvider.userModel?.email ?? "",
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ],
                 ),
               ),
@@ -48,6 +63,12 @@ class _SettingScreen extends State<SettingScreen> {
             SizedBox(height: size.height * 0.02),
 
             SettingsSection([SettingsItem(Icons.person, 'Account & Profile')]),
+            SettingsSection([
+              SettingsItem(Icons.lock, 'Change password'),
+              SettingsItem(Icons.lock_clock, 'Privacy settings'),
+              SettingsItem(Icons.notifications, 'Notification'),
+              SettingsItem(Icons.language, 'Language'),
+            ]),
             SettingsSection([
               SettingsItem(
                 Icons.logout,
@@ -58,7 +79,7 @@ class _SettingScreen extends State<SettingScreen> {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => WelcomeScreen()),
-                      (route) => false
+                      (route) => false,
                     );
                   }
                 },
