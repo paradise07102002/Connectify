@@ -64,6 +64,12 @@ class _SettingScreen extends State<SettingScreen> {
 
             SettingsSection([SettingsItem(Icons.person, 'Account & Profile')]),
             SettingsSection([
+              SettingsItem(Icons.lock, 'Change password'),
+              SettingsItem(Icons.lock_clock, 'Privacy settings'),
+              SettingsItem(Icons.notifications, 'Notification'),
+              SettingsItem(Icons.language, 'Language'),
+            ]),
+            SettingsSection([
               SettingsItem(
                 Icons.logout,
                 'Logout',
