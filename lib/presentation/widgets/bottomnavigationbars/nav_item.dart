@@ -7,7 +7,7 @@ class NavItem extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onTap;
 
-  const NavItem({
+  const NavItem({super.key, 
     required this.icon,
     required this.label,
     required this.index,
