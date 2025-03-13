@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class BirthdayScreen extends StatefulWidget {
   final String fullName;
 
-  BirthdayScreen({required this.fullName});
+  const BirthdayScreen({super.key, required this.fullName});
 
   @override
   _BirthdayScreen createState() => _BirthdayScreen();
@@ -22,7 +22,7 @@ class _BirthdayScreen extends State<BirthdayScreen> {
 
     final checkFieldNull = Provider.of<CheckFieldProvider>(context);
 
-    final TextEditingController _birthDayController = TextEditingController();
+    final TextEditingController birthDayController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(title: Text("Sinh nhật của bạn")),
@@ -34,7 +34,7 @@ class _BirthdayScreen extends State<BirthdayScreen> {
           children: [
             SizedBox(height: size.height * 0.01),
             DatePickerTextField(
-              controller: _birthDayController,
+              controller: birthDayController,
               labelText: "Sinh nhật",
               errorMessage: checkFieldNull.errorMessage,
             ),
@@ -45,7 +45,7 @@ class _BirthdayScreen extends State<BirthdayScreen> {
               onPressed: () {
                 bool check = checkFieldNull.checkNull(
                   context: context,
-                  input: _birthDayController.text.trim(),
+                  input: birthDayController.text.trim(),
                   lableError: "Vui lòng chọn ngày sinh của bạn",
                 );
 
@@ -55,7 +55,7 @@ class _BirthdayScreen extends State<BirthdayScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => GenderScreen(fullName: widget.fullName, birthDay: DateTime.parse(_birthDayController.text.trim())),
+                      builder: (context) => GenderScreen(fullName: widget.fullName, birthDay: DateTime.parse(birthDayController.text.trim())),
                     ),
                   );
                 }

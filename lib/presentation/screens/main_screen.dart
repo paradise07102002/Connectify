@@ -3,6 +3,8 @@ import 'package:connectify/presentation/widgets/bottomnavigationbars/bottom_nav_
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreen createState() => _MainScreen();
 }

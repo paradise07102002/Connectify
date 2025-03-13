@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:connectify/data/models/user_model.dart';
 import 'package:connectify/data/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

@@ -5,7 +5,7 @@ class SettingsItem extends StatelessWidget {
   final String title;
   final VoidCallback? onTap;
   
-  SettingsItem(this.icon, this.title, {this.onTap});
+  const SettingsItem(this.icon, this.title, {super.key, this.onTap});
 
   @override
   Widget build(BuildContext) {

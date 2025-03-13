@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FullnameScreen extends StatefulWidget {
+  const FullnameScreen({super.key});
+
   @override
   _FullnameScreen createState() => _FullnameScreen();
 }
@@ -18,7 +20,7 @@ class _FullnameScreen extends State<FullnameScreen> {
 
     final checkFieldNull = Provider.of<CheckFieldProvider>(context);
 
-    final TextEditingController _fullNameController = TextEditingController();
+    final TextEditingController fullNameController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(title: Text("Bạn tên là gì?")),
@@ -31,7 +33,7 @@ class _FullnameScreen extends State<FullnameScreen> {
             CustomTextField(
               label: 'Họ và tên',
               icon: Icons.people,
-              controller: _fullNameController,
+              controller: fullNameController,
               errorText: checkFieldNull.errorMessage,
             ),
             SizedBox(height: size.height * 0.01),
@@ -41,7 +43,7 @@ class _FullnameScreen extends State<FullnameScreen> {
               onPressed: () {
                 bool check = checkFieldNull.checkNull(
                   context: context,
-                  input: _fullNameController.text.trim(),
+                  input: fullNameController.text.trim(),
                   lableError: "Vui lòng nhập tên của bạn",
                 );
                 
@@ -50,7 +52,7 @@ class _FullnameScreen extends State<FullnameScreen> {
                 } else {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BirthdayScreen(fullName: _fullNameController.text.trim())),
+                    MaterialPageRoute(builder: (context) => BirthdayScreen(fullName: fullNameController.text.trim())),
                   );
                 }
               },

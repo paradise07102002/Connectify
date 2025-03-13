@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SettingsSection extends StatelessWidget {
   
   final List<Widget> items;
-  SettingsSection(this.items);
+  const SettingsSection(this.items, {super.key});
 
   @override
   Widget build(BuildContext context) {

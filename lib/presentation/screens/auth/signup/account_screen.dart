@@ -9,7 +9,7 @@ class AccountScreen extends StatefulWidget {
   final DateTime birthDay;
   final int gender;
 
-  AccountScreen({
+  const AccountScreen({super.key, 
     required this.fullName,
     required this.birthDay,
     required this.gender,

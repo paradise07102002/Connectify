@@ -5,7 +5,7 @@ class GenderScreen extends StatefulWidget {
   final String fullName;
   final DateTime birthDay;
 
-  GenderScreen({required this.fullName, required this.birthDay});
+  const GenderScreen({super.key, required this.fullName, required this.birthDay});
 
   @override
   _GenderScreen createState() => _GenderScreen();
