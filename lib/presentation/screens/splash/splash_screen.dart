@@ -24,38 +24,41 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkAuthentication() async {
-    bool isLoggedIn = await _authService.isLoggedIn();
-    bool refreshed = await _authService.refreshTokenIfNeeded();
+  bool isLoggedIn = await _authService.isLoggedIn();
+  bool refreshed = await _authService.refreshTokenIfNeeded();
 
-    ///If login or refresh is successful, go to `MainScreen`, otherwise go to `WelcomeScreen`
-    bool shouldGoToMainScreen = isLoggedIn || refreshed;
+  bool shouldGoToMainScreen = isLoggedIn || refreshed;
 
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder:
-              (context) =>
-                  shouldGoToMainScreen ? MainScreen() : WelcomeScreen(),
-        ),
-      );
-    });
-  }
+  Future.delayed(Duration(seconds: 2), () {
+    if (!mounted) return;
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) =>
+            shouldGoToMainScreen ? MainScreen() : WelcomeScreen(),
+      ),
+    );
+  });
+}
+
 
   void _startAnimation() {
-    Future.delayed(Duration(milliseconds: 500), () {
-      setState(() {
-        _opacity = 1.0;
-        _scale = 1.2;
-      });
+  Future.delayed(Duration(milliseconds: 500), () {
+    if (!mounted) return;
+    setState(() {
+      _opacity = 1.0;
+      _scale = 1.2;
     });
+  });
 
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainScreen()),
-      );
-    });
-  }
+  Future.delayed(Duration(seconds: 3), () {
+    if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => MainScreen()),
+    );
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {
