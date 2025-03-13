@@ -4,7 +4,7 @@ class UserModel {
   final String email;
   final String? fullName;
   final String? bio;
-  final String? avatarUrl;
+  String? avatarUrl;
   final String? coverUrl;
   final String? dateOfBirth;
   final int gender;
@@ -59,5 +59,35 @@ class UserModel {
       "isVerified": isVerified,
       "isActive": isActive,
     };
+  }
+
+  UserModel copyWith({
+    String? id,
+    String? username,
+    String? email,
+    String? fullName,
+    String? bio,
+    String? avatarUrl,
+    String? coverUrl,
+    String? dateOfBirth,
+    int? gender,
+    String? createdAt,
+    bool? isVerified,
+    bool? isActive,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      username: username ?? this.username,
+      email: email ?? this.email,
+      fullName: fullName ?? this.fullName,
+      bio: bio ?? this.bio,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      coverUrl: coverUrl ?? this.coverUrl,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      gender: gender ?? this.gender,
+      createdAt: createdAt ?? this.createdAt,
+      isVerified: isVerified ?? this.isVerified,
+      isActive: isActive ?? this.isActive,
+    );
   }
 }
