@@ -11,7 +11,7 @@ class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key, required this.fullName});
 
   @override
-  _BirthdayScreen createState() => _BirthdayScreen();
+  State<BirthdayScreen> createState() => _BirthdayScreen();
 }
 
 class _BirthdayScreen extends State<BirthdayScreen> {
