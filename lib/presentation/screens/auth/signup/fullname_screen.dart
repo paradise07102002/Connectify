@@ -9,7 +9,7 @@ class FullnameScreen extends StatefulWidget {
   const FullnameScreen({super.key});
 
   @override
-  _FullnameScreen createState() => _FullnameScreen();
+  State<FullnameScreen> createState() => _FullnameScreen();
 }
 
 class _FullnameScreen extends State<FullnameScreen> {
