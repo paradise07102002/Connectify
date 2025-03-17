@@ -45,6 +45,7 @@ dependencies:
 
   http: any
   path: any
+  infinite_scroll_pagination: ^5.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
