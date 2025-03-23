@@ -5,12 +5,17 @@ class CommentModel {
   final String postId;
   final String userId;
 
+  final String fullName;
+  final String avatarUrl;
+
   CommentModel({
     required this.id,
     required this.content,
     required this.createdAt,
     required this.postId,
     required this.userId,
+    required this.fullName,
+    required this.avatarUrl
   });
 
   factory CommentModel.fromJson(Map<String, dynamic> json) => CommentModel(
@@ -19,6 +24,8 @@ class CommentModel {
     createdAt: DateTime.parse(json['createAt']),
     postId: json['postId'],
     userId: json['userId'],
+    fullName: json['fullName'],
+    avatarUrl: json['avatarUrl']
   );
 
   Map<String, dynamic> toJson() => {
@@ -27,5 +34,7 @@ class CommentModel {
     'createAt': createdAt.toIso8601String(),
     'postId': postId,
     'userId': userId,
+    'fullName': fullName,
+    'avatarUrl': avatarUrl,
   };
 }

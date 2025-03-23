@@ -7,7 +7,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path/path.dart' as path;
 
 class UserRepository {
-  String baseUrl = "http://10.0.2.2:5151/api/User";
+  // String baseUrl = "http://10.0.2.2:5151/api/User";
+  String baseUrl = "http://192.168.1.27:5151/api/User";
   FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
   Future<UserModel?> fetchUserInfo(String accessToken) async {
