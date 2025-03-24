@@ -1,19 +1,26 @@
 import 'package:connectify/data/models/login_model.dart';
 import 'package:connectify/data/repositories/auth_repository.dart';
-import 'package:connectify/presentation/widgets/dialogs/dialog_helper.dart';
 import 'package:flutter/material.dart';
 
 class LoginController extends ChangeNotifier {
   final AuthRepository _authRepository = AuthRepository();
 
-  bool isLoading = false;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   String? emailError, passwordError;
+
+  void _setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
 
   Future<Map<String, dynamic>?> login({
     required BuildContext context,
     required String email,
     required String password,
+    required Function(String) onError,
+    required Function() onSuccess,
   }) async {
     emailError = email.trim().isEmpty ? "Please enter Email" : null;
     passwordError = password.isEmpty ? "Please enter Password" : null;
@@ -23,8 +30,7 @@ class LoginController extends ChangeNotifier {
       return null;
     }
 
-    isLoading = true;
-    notifyListeners();
+    _setLoading(true);
 
     try {
       final login = LoginModelRequest(email: email.trim(), password: password);
@@ -32,15 +38,14 @@ class LoginController extends ChangeNotifier {
       final response = await _authRepository.login(login);
 
       if (response.containsKey("error")) {
-        DialogHelper.showErrorDialog(context, response["error"]);
+        onError(response['error']);
       } else {
-        DialogHelper.showSuccessDialog(context, "Login success");
+        onSuccess();
       }
 
       return response;
     } finally {
-      isLoading = false;
-      notifyListeners();
+      _setLoading(false);
     }
   }
 }
