@@ -5,9 +5,14 @@ import 'package:flutter/material.dart';
 class LoginController extends ChangeNotifier {
   final AuthRepository _authRepository = AuthRepository();
 
-  bool isLoading = false;
+  bool _isLoading = false;
 
   String? emailError, passwordError;
+
+  void _setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
 
   Future<Map<String, dynamic>?> login({
     required BuildContext context,
@@ -24,8 +29,7 @@ class LoginController extends ChangeNotifier {
       return null;
     }
 
-    isLoading = true;
-    notifyListeners();
+    _setLoading(true);
 
     try {
       final login = LoginModelRequest(email: email.trim(), password: password);
@@ -40,8 +44,7 @@ class LoginController extends ChangeNotifier {
 
       return response;
     } finally {
-      isLoading = false;
-      notifyListeners();
+      _setLoading(false);
     }
   }
 }
