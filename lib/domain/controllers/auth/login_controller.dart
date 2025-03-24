@@ -6,6 +6,7 @@ class LoginController extends ChangeNotifier {
   final AuthRepository _authRepository = AuthRepository();
 
   bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   String? emailError, passwordError;
 
