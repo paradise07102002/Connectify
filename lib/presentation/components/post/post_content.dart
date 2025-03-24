@@ -1,6 +1,6 @@
 import 'package:animated_read_more_text/animated_read_more_text.dart';
 import 'package:connectify/data/models/post/media_model.dart';
-import 'package:connectify/presentation/components/post/photo_gallery_screen.dart';
+import 'package:connectify/presentation/components/post/post_photo_gallary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -46,7 +46,7 @@ class PostContent extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => PhotoGalleryScreen(medias: medias, initialIndex: initialIndex),
+        builder: (_) => PostPhotoGallary(medias: medias, initialIndex: initialIndex),
       ),
     );
   }
