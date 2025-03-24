@@ -7,8 +7,11 @@ import 'package:connectify/domain/controllers/home/home_controller.dart';
 import 'package:connectify/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import 'core/utils/short_vi_messages.dart';
 
 void main() {
+  timeago.setLocaleMessages('vi_short', ShortViMessages());
   runApp(
     MultiProvider(
       providers: [
