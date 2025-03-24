@@ -1,8 +1,8 @@
-import 'package:connectify/domain/controllers/auth/login_controller.dart';
-import 'package:connectify/presentation/widgets/buttons/primary_button.dart';
-import 'package:connectify/presentation/widgets/fields/custom_text_field.dart';
+import 'package:connectify/presentation/components/login/login_button.dart';
+import 'package:connectify/presentation/components/login/login_form.dart';
+import 'package:connectify/presentation/components/login/login_logo.dart';
+import 'package:connectify/presentation/components/login/login_signup_link.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,8 +17,6 @@ class _LoginScreen extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //
-    final loginController = Provider.of<LoginController>(context);
 
     // Get the screen size to make the UI responsive
     final size = MediaQuery.of(context).size;
@@ -33,49 +31,17 @@ class _LoginScreen extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: size.height * 0.045),
-              Center(
-                child: Image.asset(
-                  'assets/images/logo_connectify.png',
-                  width: size.width * 0.5,
-                ),
-              ),
-              SizedBox(height: size.height * 0.01),
-              CustomTextField(
-                label: "Email",
-                icon: Icons.email,
-                controller: _emailController,
-                errorText: loginController.emailError,
-              ),
-              SizedBox(height: size.height * 0.01),
-              CustomTextField(
-                label: "Password",
-                icon: Icons.lock,
-                isPassword: true,
-                controller: _passwordController,
-                errorText: loginController.passwordError,
-              ),
+
+              LoginLogo(),
               SizedBox(height: size.height * 0.01),
 
-              loginController.isLoading
-                  ? Center(child: CircularProgressIndicator())
-                  : PrimaryButton(
-                    text: "Login",
-                    onPressed: () async {
-                      await loginController.login(
-                        context: context,
-                        email: _emailController.text.trim(),
-                        password: _passwordController.text,
-                      );
-                    },
-                  ),
+              LoginForm(emailController: _emailController, passwordController: _passwordController),
               SizedBox(height: size.height * 0.01),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an account ?"),
-                  TextButton(onPressed: () {}, child: Text("Sign up")),
-                ],
-              ),
+
+              LoginButton(emailController: _emailController, passwordController: _passwordController),
+              SizedBox(height: size.height * 0.01),
+
+              LoginSignupLink()
             ],
           ),
         ),
