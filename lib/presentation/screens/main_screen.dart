@@ -1,3 +1,4 @@
+import 'package:connectify/presentation/screens/home/home_screen.dart';
 import 'package:connectify/presentation/screens/settings/setting_screen.dart';
 import 'package:connectify/presentation/widgets/bottomnavigationbars/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _MainScreen extends State<MainScreen> {
   }
 
   static final List<Widget> _screens = <Widget>[
-    Center(child: Text('Home', style: TextStyle(fontSize: 24))),
+    HomeScreen(),
     Center(child: Text('Search', style: TextStyle(fontSize: 24))),
     Center(child: Text('', style: TextStyle(fontSize: 24))),
     Center(child: Text('Community', style: TextStyle(fontSize: 24))),
