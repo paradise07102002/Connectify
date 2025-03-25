@@ -13,7 +13,7 @@ class PostItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
+      // padding: EdgeInsets.all(5),
       decoration: BoxDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,6 +21,7 @@ class PostItem extends StatelessWidget {
           PostHeader(urlAvatar: post.avatarUrl, fullname: post.fullName, createdAt: post.createdAt),
           SizedBox(height: 10),
           PostContent(content: post.content ?? '', medias: post.medias),
+          SizedBox(height: 10),
           PostActions(comments: post.comments,)
         ],
       ),
