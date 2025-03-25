@@ -9,52 +9,47 @@ class PostActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            Stack(
-              children: [
-                Icon(Icons.favorite, color: Colors.black, size: 35),
-                Positioned.fill(
-                  child: Icon(Icons.favorite, color: Colors.white, size: 32),
-                ),
-              ],
-            ),
-            Text('999'),
-          ],
+        GestureDetector(
+          onTap: () {},
+          child: Row(
+            children: [
+              Image.asset('assets/icons/heart.png', width: 32, height: 32),
+              SizedBox(width: 5),
+              Text('Like', style: TextStyle(fontSize: 16),),
+            ],
+          ),
         ),
 
-        Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                CommentList().showComment(context, comments);
-              },
-              child: Stack(
-                children: [
-                  Icon(Icons.comment, color: Colors.black, size: 35),
-                  Positioned.fill(
-                    child: Icon(Icons.comment, color: Colors.white, size: 32),
-                  ),
-                ],
+        GestureDetector(
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  CommentList().showComment(context, comments);
+                },
+                child: Image.asset(
+                  'assets/icons/comment.png',
+                  width: 32,
+                  height: 32,
+                ),
               ),
-            ),
-            Text(comments.length.toString()),
-          ],
+              SizedBox(width: 5),
+              Text('Comment', style: TextStyle(fontSize: 16),),
+            ],
+          ),
         ),
 
-        Row(
-          children: [
-            Stack(
-              children: [
-                Icon(Icons.share, color: Colors.black, size: 35),
-                Positioned.fill(
-                  child: Icon(Icons.share, color: Colors.white, size: 32),
-                ),
-              ],
-            ),
-            Text('1'),
-          ],
+        GestureDetector(
+          onTap: () {},
+          child: Row(
+            children: [
+              Image.asset('assets/icons/share.png', width: 32, height: 32),
+              SizedBox(width: 5),
+              Text('Share', style: TextStyle(fontSize: 16),),
+            ],
+          ),
         ),
       ],
     );
