@@ -72,4 +72,21 @@ class SignupController with ChangeNotifier {
       return response;
     }
   }
+
+  String? errorMessage;
+
+  bool checkNull({
+    required BuildContext context,
+    required String input,
+    required String lableError,
+  }) {
+    errorMessage = input.trim().isEmpty ? lableError : null;
+
+    if (errorMessage != null) {
+      notifyListeners();
+      return true;
+    }
+
+    return false;
+  }
 }
