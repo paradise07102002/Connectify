@@ -8,7 +8,7 @@ class SettingsItem extends StatelessWidget {
   const SettingsItem(this.icon, this.title, {super.key, this.onTap});
 
   @override
-  Widget build(BuildContext) {
+  Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon, color: Colors.blueGrey),
       title: Text(title),

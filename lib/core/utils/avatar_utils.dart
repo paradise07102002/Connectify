@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:connectify/data/providers/user_provider.dart';
+import 'package:connectify/domain/controllers/setting/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class AvatarUtils {
     bool? isConfirm = await changeAvatar(context, imageFile);
 
     if (isConfirm == true && context.mounted) {
-      await Provider.of<UserProvider>(
+      await Provider.of<SettingController>(
         context,
         listen: false,
       ).uploadAvatar(imageFile);
