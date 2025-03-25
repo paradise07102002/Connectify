@@ -1,5 +1,5 @@
-import 'package:connectify/data/providers/user_provider.dart';
 import 'package:connectify/data/services/auth_service.dart';
+import 'package:connectify/domain/controllers/setting/setting_controller.dart';
 import 'package:connectify/presentation/components/settings/settings_list.dart';
 import 'package:connectify/presentation/components/settings/settings_profile_header.dart';
 import 'package:flutter/material.dart';
@@ -21,14 +21,14 @@ class _SettingScreen extends State<SettingScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<UserProvider>(context, listen: false).loadUserData();
+    Provider.of<SettingController>(context, listen: false).loadUserData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Settings'), centerTitle: true),
-      body: Consumer<UserProvider>(
+      body: Consumer<SettingController>(
         builder: (context, userProvider, child) {
           return userProvider.isLoading
               ? Center(child: CircularProgressIndicator())
