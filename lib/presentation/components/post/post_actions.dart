@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class PostActions extends StatelessWidget {
   final List<CommentModel> comments;
-  const PostActions({super.key, required this.comments});
+  final String postId;
+  const PostActions({super.key, required this.comments, required this.postId});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class PostActions extends StatelessWidget {
             children: [
               Image.asset('assets/icons/heart.png', width: 32, height: 32),
               SizedBox(width: 5),
-              Text('Like', style: TextStyle(fontSize: 16),),
+              Text('Like', style: TextStyle(fontSize: 16)),
             ],
           ),
         ),
@@ -27,7 +28,7 @@ class PostActions extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  CommentList().showComment(context, comments);
+                  CommentList().showComment(context, comments, postId);
                 },
                 child: Image.asset(
                   'assets/icons/comment.png',
@@ -36,7 +37,7 @@ class PostActions extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 5),
-              Text('Comment', style: TextStyle(fontSize: 16),),
+              Text('Comment', style: TextStyle(fontSize: 16)),
             ],
           ),
         ),
@@ -47,7 +48,7 @@ class PostActions extends StatelessWidget {
             children: [
               Image.asset('assets/icons/share.png', width: 32, height: 32),
               SizedBox(width: 5),
-              Text('Share', style: TextStyle(fontSize: 16),),
+              Text('Share', style: TextStyle(fontSize: 16)),
             ],
           ),
         ),
