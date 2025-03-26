@@ -22,7 +22,7 @@ class PostItem extends StatelessWidget {
           SizedBox(height: 10),
           PostContent(content: post.content ?? '', medias: post.medias),
           SizedBox(height: 10),
-          PostActions(comments: post.comments,)
+          PostActions(comments: post.comments, postId: post.id)
         ],
       ),
     );
