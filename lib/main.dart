@@ -1,6 +1,7 @@
 import 'package:connectify/core/utils/navigator_service.dart';
 import 'package:connectify/domain/controllers/auth/login_controller.dart';
 import 'package:connectify/domain/controllers/auth/signup_controller.dart';
+import 'package:connectify/domain/controllers/home/comment_controller.dart';
 import 'package:connectify/domain/controllers/home/home_controller.dart';
 import 'package:connectify/domain/controllers/setting/setting_controller.dart';
 import 'package:connectify/presentation/screens/splash/splash_screen.dart';
@@ -18,6 +19,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => SignupController()),
         ChangeNotifierProvider(create: (context) => SettingController()),
         ChangeNotifierProvider(create: (context) => HomeController()),
+        ChangeNotifierProvider(create: (context) => CommentController())
       ],
       child: MyApp(),
     ),
