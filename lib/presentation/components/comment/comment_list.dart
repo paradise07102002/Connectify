@@ -4,7 +4,7 @@ import 'package:connectify/presentation/components/comment/comment_item.dart';
 import 'package:flutter/material.dart';
 
 class CommentList {
-  void showComment(BuildContext context, List<CommentModel> comments) {
+  void showComment(BuildContext context, List<CommentModel> comments, String postId) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -39,7 +39,7 @@ class CommentList {
                       ),
                     ),
                     Divider(),
-                    CommentInput(),
+                    CommentInput(postId: postId,),
                   ],
                 ),
               );
