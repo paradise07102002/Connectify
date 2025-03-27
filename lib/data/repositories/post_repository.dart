@@ -6,13 +6,13 @@
   class PostRepository {
     final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
-    final baseUrl = 'http://10.0.2.2:5151/api/Post';
+    final baseUrl = 'http://10.0.2.2:5151/api/Posts';
 
     Future<List<PostModel>> getAllPost() async {
       final accessToken = await secureStorage.read(key: 'access_token');
 
       final response = await http.get(
-        Uri.parse('$baseUrl/get-all-post'),
+        Uri.parse(baseUrl),
         headers: {'accept': '*/*', 'Authorization': 'Bearer $accessToken'},
       );
 
