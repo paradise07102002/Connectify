@@ -1,4 +1,3 @@
-import 'package:connectify/data/models/post/like_model.dart';
 import 'package:connectify/data/models/post/media_model.dart';
 import 'package:connectify/data/models/post/share_model.dart';
 
