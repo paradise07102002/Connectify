@@ -57,6 +57,7 @@ class _CommentInput extends State<CommentInput> {
                 },
               );
               contentController.clear();
+              commentController.getComments(widget.postId);
             },
           ),
         ],
