@@ -1,10 +1,11 @@
-import 'package:connectify/data/models/post/comment_model.dart';
+import 'package:connectify/domain/controllers/home/comment_controller.dart';
 import 'package:connectify/presentation/components/comment/comment_input.dart';
 import 'package:connectify/presentation/components/comment/comment_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CommentList {
-  void showComment(BuildContext context, List<CommentModel> comments, String postId) {
+  void showComment(BuildContext context, String postId) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -12,35 +13,51 @@ class CommentList {
         borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
       ),
       builder: (context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: DraggableScrollableSheet(
-            expand: false,
-            initialChildSize: 0.7,
-            minChildSize: 0.3,
-            maxChildSize: 0.8,
-            builder: (context, scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+        return ChangeNotifierProvider(
+          create: (_) => CommentController()..getComments(postId),
+          child: Consumer<CommentController>(
+            builder: (context, commentController, child) {
+              return Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                child: Column(
-                  children: [
-                    SizedBox(height: 15),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: comments.length,
-                        itemBuilder: (context, index) {
-                          return CommentItem(comment: comments[index]);
-                        },
+                child: DraggableScrollableSheet(
+                  expand: false,
+                  initialChildSize: 0.7,
+                  minChildSize: 0.3,
+                  maxChildSize: 0.8,
+                  builder: (context, scrollController) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(15),
+                        ),
                       ),
-                    ),
-                    Divider(),
-                    CommentInput(postId: postId,),
-                  ],
+                      child: Column(
+                        children: [
+                          SizedBox(height: 15),
+                          Expanded(
+                            child:
+                                commentController.isLoading
+                                    ? Center(child: CircularProgressIndicator())
+                                    : ListView.builder(
+                                      itemCount:
+                                          commentController.comments.length,
+                                      itemBuilder: (context, index) {
+                                        return CommentItem(
+                                          comment:
+                                              commentController.comments[index],
+                                        );
+                                      },
+                                    ),
+                          ),
+                          Divider(),
+                          CommentInput(postId: postId),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               );
             },

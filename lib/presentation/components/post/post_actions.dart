@@ -1,11 +1,9 @@
-import 'package:connectify/data/models/post/comment_model.dart';
 import 'package:connectify/presentation/components/comment/comment_list.dart';
 import 'package:flutter/material.dart';
 
 class PostActions extends StatelessWidget {
-  final List<CommentModel> comments;
   final String postId;
-  const PostActions({super.key, required this.comments, required this.postId});
+  const PostActions({super.key, required this.postId});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class PostActions extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  CommentList().showComment(context, comments, postId);
+                  CommentList().showComment(context, postId);
                 },
                 child: Image.asset(
                   'assets/icons/comment.png',

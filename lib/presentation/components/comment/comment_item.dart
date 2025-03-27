@@ -1,11 +1,11 @@
-import 'package:connectify/data/models/post/comment_model.dart';
+import 'package:connectify/data/models/comment/get_comment_model.dart';
 import 'package:connectify/presentation/components/comment/comment_actions.dart';
 import 'package:connectify/presentation/components/comment/comment_avatar.dart';
 import 'package:connectify/presentation/components/comment/comment_content.dart';
 import 'package:flutter/material.dart';
 
 class CommentItem extends StatefulWidget {
-  final CommentModel comment;
+  final GetCommentModel comment;
   const CommentItem({super.key, required this.comment});
 
   @override
