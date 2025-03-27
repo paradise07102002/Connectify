@@ -8,7 +8,7 @@ class CommentRepository {
 
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
-  Future<bool> comment(
+  Future<bool> createComment(
     String postId,
     CreateCommentRequest createComment,
   ) async {
