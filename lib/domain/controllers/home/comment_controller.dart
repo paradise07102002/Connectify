@@ -33,7 +33,7 @@ class CommentController extends ChangeNotifier {
     try {
       final createComment = CreateCommentRequest(content: content.trim());
 
-      final response = await commentRepository.comment(postId, createComment);
+      final response = await commentRepository.createComment(postId, createComment);
 
       if (response) {
         onSuccess();
