@@ -12,7 +12,6 @@ class PostModel {
   final String avatarUrl;
   final String fullName;
   final List<MediaModel> medias;
-  final List<LikeModel> likes;
   final List<ShareModel> shares;
 
   PostModel({
@@ -25,7 +24,6 @@ class PostModel {
     required this.avatarUrl,
     required this.fullName,
     required this.medias,
-    required this.likes,
     required this.shares,
   });
 
@@ -42,7 +40,6 @@ class PostModel {
       fullName: json['fullName'],
       medias:
           (json['medias'] as List).map((e) => MediaModel.fromJson(e)).toList(),
-      likes: (json['likes'] as List).map((e) => LikeModel.fromJson(e)).toList(),
       shares:
           (json['shares'] as List).map((e) => ShareModel.fromJson(e)).toList(),
     );
@@ -58,7 +55,6 @@ class PostModel {
     'avatarUrl': avatarUrl,
     'fullName': fullName,
     'medias': medias.map((e) => e.toJson()).toList(),
-    'likes': likes.map((e) => e.toJson()).toList(),
     'shares': shares.map((e) => e.toJson()).toList(),
   };
 }
