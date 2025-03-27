@@ -20,7 +20,7 @@ class CommentModel {
   factory CommentModel.fromJson(Map<String, dynamic> json) => CommentModel(
     id: json['id'],
     content: json['content'],
-    createdAt: DateTime.parse(json['createAt']),
+    createdAt: DateTime.parse(json['createdAt']),
     postId: json['postId'],
     userId: json['userId'],
     avatarUrl: json['avatarUrl'],
@@ -30,7 +30,7 @@ class CommentModel {
   Map<String, dynamic> toJson() => {
     'id': id,
     'content': content,
-    'createAt': createdAt.toIso8601String(),
+    'createdAt': createdAt.toIso8601String(),
     'postId': postId,
     'userId': userId,
     'avatarUrl': avatarUrl,
