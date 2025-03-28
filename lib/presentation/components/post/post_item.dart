@@ -19,7 +19,7 @@ class PostItem extends StatelessWidget {
         children: [
           PostHeader(urlAvatar: post.avatarUrl, fullname: post.fullName, createdAt: post.createdAt),
           SizedBox(height: 10),
-          PostContent(content: post.content ?? '', medias: post.medias),
+          PostContent(content: post.content ?? '', postId: post.id),
           SizedBox(height: 10),
           PostActions(postId: post.id)
         ],
