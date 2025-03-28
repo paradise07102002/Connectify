@@ -3,9 +3,11 @@ import 'package:connectify/domain/controllers/auth/login_controller.dart';
 import 'package:connectify/domain/controllers/auth/signup_controller.dart';
 import 'package:connectify/domain/controllers/home/comment_controller.dart';
 import 'package:connectify/domain/controllers/home/home_controller.dart';
+import 'package:connectify/domain/controllers/home/media_controller.dart';
 import 'package:connectify/domain/controllers/setting/setting_controller.dart';
 import 'package:connectify/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'core/utils/short_vi_messages.dart';
@@ -19,7 +21,8 @@ void main() {
         ChangeNotifierProvider(create: (context) => SignupController()),
         ChangeNotifierProvider(create: (context) => SettingController()),
         ChangeNotifierProvider(create: (context) => HomeController()),
-        ChangeNotifierProvider(create: (context) => CommentController())
+        ChangeNotifierProvider(create: (context) => CommentController()),
+        ChangeNotifierProvider(create: (context) => MediaController()),
       ],
       child: MyApp(),
     ),
