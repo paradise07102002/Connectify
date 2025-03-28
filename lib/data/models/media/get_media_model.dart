@@ -1,17 +1,17 @@
-class MediaModel {
+class GetMediaModel {
   final String id;
   final String mediaUrl;
   final int type;
   final String postId;
 
-  MediaModel({
+  GetMediaModel({
     required this.id,
     required this.mediaUrl,
     required this.type,
     required this.postId,
   });
 
-  factory MediaModel.fromJson(Map<String, dynamic> json) => MediaModel(
+  factory GetMediaModel.fromJson(Map<String, dynamic> json) => GetMediaModel(
     id: json['id'],
     mediaUrl: json['mediaUrl'],
     type: json['type'],
