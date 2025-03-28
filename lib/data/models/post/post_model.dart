@@ -1,4 +1,3 @@
-import 'package:connectify/data/models/post/media_model.dart';
 
 class PostModel {
   final String id;
@@ -9,7 +8,6 @@ class PostModel {
   final String userId;
   final String avatarUrl;
   final String fullName;
-  final List<MediaModel> medias;
 
   PostModel({
     required this.id,
@@ -20,7 +18,6 @@ class PostModel {
     required this.userId,
     required this.avatarUrl,
     required this.fullName,
-    required this.medias,
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
@@ -34,8 +31,6 @@ class PostModel {
       userId: json['userId'],
       avatarUrl: json['avatarUrl'],
       fullName: json['fullName'],
-      medias:
-          (json['medias'] as List).map((e) => MediaModel.fromJson(e)).toList(),
     );
   }
 
@@ -48,6 +43,5 @@ class PostModel {
     'userId': userId,
     'avatarUrl': avatarUrl,
     'fullName': fullName,
-    'medias': medias.map((e) => e.toJson()).toList(),
   };
 }
