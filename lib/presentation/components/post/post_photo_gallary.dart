@@ -1,10 +1,10 @@
+import 'package:connectify/data/models/media/get_media_model.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:connectify/data/models/post/media_model.dart';
 
 class PostPhotoGallary extends StatefulWidget {
-  final List<MediaModel> medias;
+  final List<GetMediaModel> medias;
   final int initialIndex;
 
   const PostPhotoGallary({super.key, required this.medias, required this.initialIndex});
